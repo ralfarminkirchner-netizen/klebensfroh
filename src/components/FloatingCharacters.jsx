@@ -11,23 +11,16 @@ const FloatingCharacters = () => {
   const imagesRef = useRef([]);
 
   const CHARACTER_PATHS = [
-    '/images/petra_icons/graue_katze.png',
-    '/images/petra_icons/elefant.png',
-    '/images/petra_icons/reh.png',
-    '/images/petra_icons/rosa_reh.png',
-    '/images/petra_icons/zebra.png',
-    '/images/petra_icons/kamel.png',
-    '/images/petra_icons/panda_grid.png',
-    '/images/petra_icons/loewe.png',
-    '/images/petra_icons/wal.png',
-    '/images/petra_icons/wolke.png',
-    '/images/petra_icons/weisse_katze.png',
-    '/images/petra_icons/waschbaer.png',
-    '/images/petra_icons/rosa_fox.png',
-    '/images/petra_icons/pinguin.png',
-    '/images/petra_icons/pink_baer.png',
-    '/images/petra_icons/kuh.png',
-    '/images/petra_icons/giraffe_grid.png',
+    '/images/stickers/graue_katze.png',
+    '/images/stickers/elefant.png',
+    '/images/stickers/reh.png',
+    '/images/stickers/rosa_reh.png',
+    '/images/stickers/rosa_fuchs.png',
+    '/images/stickers/zebra.png',
+    '/images/stickers/kamel.png',
+    '/images/stickers/panda_sitzend.png',
+    '/images/stickers/loewe.png',
+    '/images/stickers/wal.png',
   ];
 
   const initChars = useCallback((w, h, images) => {

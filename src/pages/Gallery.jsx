@@ -4,18 +4,18 @@ import { playPop, playHover, playChime, playSqueak } from '../sounds';
 import './Gallery.css';
 
 const works = [
-  { id: 1, img: '/images/IMG_4386.jpg', title: 'Bärentüte', desc: 'Vesper-Tüte mit Polizisten-Bär', sticker: '/images/petra_icons/petra_panda.png', rot: -2 },
-  { id: 2, img: '/images/IMG_4387.jpg', title: 'Giraffen-Tüte', desc: 'Papiertüte als Giraffe', sticker: '/images/petra_icons/petra_giraffe.png', rot: 3 },
-  { id: 3, img: '/images/IMG_4388.jpg', title: 'Gutschein-Katze', desc: 'Leoparden-Verpackung', sticker: '/images/petra_icons/graue_katze.png', rot: -1 },
-  { id: 4, img: '/images/IMG_4391.jpg', title: 'Schlangen-Bild', desc: 'Handgemalte Schlange im Rahmen', sticker: '/images/petra_icons/loewe.png', rot: 2 },
-  { id: 5, img: '/images/IMG_4392.jpg', title: 'Krokodil-Box', desc: 'Geburtstags-Box mit Krokodil', sticker: '/images/petra_icons/waschbaer.png', rot: -3 },
-  { id: 6, img: '/images/IMG_4393.jpg', title: 'Geldautomat', desc: 'Geldgeschenk aus Karton', sticker: '/images/petra_icons/elefant.png', rot: 1 },
-  { id: 7, img: '/images/IMG_4384.jpg', title: 'DIY Geschenkidee', desc: '2-in-1 Geldgeschenk', sticker: '/images/petra_icons/rosa_reh.png', rot: -2 },
-  { id: 8, img: '/images/IMG_4390.jpg', title: 'Alles Liebe', desc: 'Herz-Box mit Schleife', sticker: '/images/petra_icons/rosa_fox.png', rot: 3 },
-  { id: 9, img: '/images/IMG_4378.jpg', title: 'Logo auf Leinwand', desc: 'Das Original-Logo', sticker: '/images/petra_icons/panda_grid.png', rot: 0 },
-  { id: 10, img: '/images/IMG_4394.jpg', title: 'Windel-Panda', desc: 'Panda aus Windeln', sticker: '/images/petra_icons/pink_baer.png', rot: -1 },
-  { id: 11, img: '/images/IMG_4383.jpg', title: 'Petras Bastelwelt', desc: 'Die Werkstatt', sticker: '/images/petra_icons/weisse_katze.png', rot: 2 },
-  { id: 12, img: '/images/IMG_4381.jpg', title: 'Instagram-Feed', desc: 'Alle Ideen auf einen Blick', sticker: '/images/petra_icons/pinguin.png', rot: -3 },
+  { id: 1, img: '/images/IMG_4386.jpg', title: 'Bärentüte', desc: 'Vesper-Tüte mit Polizisten-Bär', sticker: '/images/stickers/petra_panda.png', rot: -2 },
+  { id: 2, img: '/images/IMG_4387.jpg', title: 'Giraffen-Tüte', desc: 'Papiertüte als Giraffe', sticker: '/images/stickers/petra_giraffe.png', rot: 3 },
+  { id: 3, img: '/images/IMG_4388.jpg', title: 'Gutschein-Katze', desc: 'Leoparden-Verpackung', sticker: '/images/stickers/graue_katze.png', rot: -1 },
+  { id: 4, img: '/images/IMG_4391.jpg', title: 'Schlangen-Bild', desc: 'Handgemalte Schlange im Rahmen', sticker: '/images/stickers/loewe.png', rot: 2 },
+  { id: 5, img: '/images/IMG_4392.jpg', title: 'Krokodil-Box', desc: 'Geburtstags-Box mit Krokodil', sticker: '/images/stickers/waschbaer.png', rot: -3 },
+  { id: 6, img: '/images/IMG_4393.jpg', title: 'Geldautomat', desc: 'Geldgeschenk aus Karton', sticker: '/images/stickers/elefant.png', rot: 1 },
+  { id: 7, img: '/images/IMG_4384.jpg', title: 'DIY Geschenkidee', desc: '2-in-1 Geldgeschenk', sticker: '/images/stickers/rosa_reh.png', rot: -2 },
+  { id: 8, img: '/images/IMG_4390.jpg', title: 'Alles Liebe', desc: 'Herz-Box mit Schleife', sticker: '/images/stickers/rosa_fuchs.png', rot: 3 },
+  { id: 9, img: '/images/IMG_4378.jpg', title: 'Logo auf Leinwand', desc: 'Das Original-Logo', sticker: '/images/stickers/panda_sitzend.png', rot: 0 },
+  { id: 10, img: '/images/IMG_4394.jpg', title: 'Windel-Panda', desc: 'Panda aus Windeln', sticker: '/images/stickers/pink_baer.png', rot: -1 },
+  { id: 11, img: '/images/IMG_4383.jpg', title: 'Petras Bastelwelt', desc: 'Die Werkstatt', sticker: '/images/stickers/weisse_katze.png', rot: 2 },
+  { id: 12, img: '/images/IMG_4381.jpg', title: 'Instagram-Feed', desc: 'Alle Ideen auf einen Blick', sticker: '/images/stickers/pinguin.png', rot: -3 },
 ];
 
 const Gallery = () => {
@@ -47,7 +47,7 @@ const Gallery = () => {
             <div className="craft-photo"><img src={w.img} alt={w.title} loading="lazy" /></div>
             <span className="scrap-caption">{w.title}</span>
             <motion.img src={w.sticker} alt="" className="sticker gal-sticker"
-              whileHover={{ scale: 1.4, rotate: 12 }}
+              whileHover={{ scale: 1.6, rotate: 12 }}
               onClick={(e) => { e.stopPropagation(); playSqueak(); }} />
           </motion.div>
         ))}

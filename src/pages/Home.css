@@ -3,9 +3,12 @@
 
 .hero-layout { display: grid; grid-template-columns: 1fr 1.1fr; gap: 40px; align-items: center; }
 
-.hero-title {
-  font-size: 5rem; color: var(--clover-dark); line-height: 1.05;
-  position: relative; margin-bottom: 24px;
+.hero-logo-large {
+  max-width: 100%;
+  height: auto;
+  max-height: 200px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
 }
 
 .hero-clover {

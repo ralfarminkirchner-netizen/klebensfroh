@@ -16,15 +16,13 @@
 .logo-group:hover { transform: scale(1.04); }
 
 .logo-img {
-  width: 52px; height: 52px;
-  border-radius: 14px;
-  object-fit: cover;
-  border: 2px solid var(--clover-pale);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
 }
 
-.logo-name { font-family: var(--font-hand); font-size: 2.1rem; font-weight: 700; color: var(--clover-dark); line-height: 1; }
-.logo-sub { font-family: var(--font-hand); font-size: 0.95rem; color: var(--text-light); }
+
 
 .nav-bar { display: flex; gap: 6px; }
 

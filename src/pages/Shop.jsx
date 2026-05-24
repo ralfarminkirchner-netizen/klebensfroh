@@ -3,11 +3,11 @@ import { playPop, playHover, playSqueak } from '../sounds';
 import './Shop.css';
 
 const services = [
-  { icon: '/images/petra_icons/petra_panda.png', title: 'Tier-Verpackungen', desc: 'Dein Lieblingstier als Geschenktüte oder Box' },
-  { icon: '/images/petra_icons/weisse_katze.png', title: 'Handbemalte Karten', desc: 'Für Geburtstage, Taufen und besondere Anlässe' },
-  { icon: '/images/petra_icons/petra_giraffe.png', title: 'Deko & Aufsteller', desc: 'Kleine Kunstwerke aus Pappe für Kinderzimmer' },
-  { icon: '/images/petra_icons/panda_grid.png', title: 'Windeltiere', desc: 'Süße Pandas, Bären und mehr aus Windeln' },
-  { icon: '/images/petra_icons/loewe.png', title: 'Geldgeschenke', desc: 'Spardosen & Geldautomaten aus Karton' },
+  { icon: '/images/stickers/petra_panda.png', title: 'Tier-Verpackungen', desc: 'Dein Lieblingstier als Geschenktüte oder Box' },
+  { icon: '/images/stickers/weisse_katze.png', title: 'Handbemalte Karten', desc: 'Für Geburtstage, Taufen und besondere Anlässe' },
+  { icon: '/images/stickers/petra_giraffe.png', title: 'Deko & Aufsteller', desc: 'Kleine Kunstwerke aus Pappe für Kinderzimmer' },
+  { icon: '/images/stickers/panda_sitzend.png', title: 'Windeltiere', desc: 'Süße Pandas, Bären und mehr aus Windeln' },
+  { icon: '/images/stickers/loewe.png', title: 'Geldgeschenke', desc: 'Spardosen & Geldautomaten aus Karton' },
 ];
 
 const Shop = () => (
@@ -52,8 +52,8 @@ const Shop = () => (
           <div className="field"><label>Deine Idee</label>
             <textarea className="input-craft" rows="4" placeholder="z.B. 'Eine Krokodil-Box für den 5. Geburtstag'"></textarea>
           </div>
-          <motion.button type="submit" className="btn-craft btn-full" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }} onClick={playPop}>
-            <img src="/images/petra_icons/rosa_reh.png" alt="" className="btn-sticker" />
+          <motion.button type="submit" className="btn-craft btn-full" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }} onClick={playPop}>
+            <img src="/images/stickers/rosa_reh.png" alt="" className="btn-sticker" />
             Nachricht absenden
           </motion.button>
         </form>

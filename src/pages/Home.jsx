@@ -22,8 +22,7 @@ const Home = () => {
         <div className="container hero-layout">
           <motion.div className="hero-left" {...fadeIn(0)}>
             <h1 className="hero-title">
-              Glück<br />selbermachen
-              <img src="/images/clover_generated.png" alt="" className="hero-clover" />
+              <img src="/images/stickers/logo.png" alt="Klebensfroh" className="hero-logo-large" />
             </h1>
             <p className="hero-text">
               Willkommen bei <strong>Klebensfroh</strong>! Ich bin Petra und
@@ -32,11 +31,11 @@ const Home = () => {
             </p>
             <div className="hero-actions">
               <Link to="/galerie" className="btn-craft" onClick={playChime}>
-                <img src="/images/petra_icons/loewe.png" alt="" className="btn-sticker" />
+                <img src="/images/stickers/loewe.png" alt="" className="btn-sticker" />
                 Galerie ansehen
               </Link>
               <Link to="/auftraege" className="btn-craft btn-light" onClick={playPop}>
-                <img src="/images/petra_icons/weisse_katze.png" alt="" className="btn-sticker" />
+                <img src="/images/stickers/weisse_katze.png" alt="" className="btn-sticker" />
                 Auftrag anfragen
               </Link>
             </div>
@@ -61,14 +60,14 @@ const Home = () => {
             </motion.div>
 
             {/* Petra's REAL characters as peeking stickers */}
-            <motion.img src="/images/petra_icons/petra_panda.png" alt="Panda" className="sticker hero-sticker-1"
-              {...fadeIn(0.7)} whileHover={{ scale: 1.3, rotate: 10, y: -15 }} whileTap={{ scale: 0.8 }}
+            <motion.img src="/images/stickers/petra_panda.png" alt="Panda" className="sticker hero-sticker-1"
+              {...fadeIn(0.7)} whileHover={{ scale: 1.5, rotate: 10, y: -15, zIndex: 10 }} whileTap={{ scale: 0.9 }}
               onClick={playSqueak} onMouseEnter={playHover} />
-            <motion.img src="/images/petra_icons/petra_cat.png" alt="Katze" className="sticker hero-sticker-2"
-              {...fadeIn(0.9)} whileHover={{ scale: 1.3, rotate: -10, y: -15 }} whileTap={{ scale: 0.8 }}
+            <motion.img src="/images/stickers/petra_cat.png" alt="Katze" className="sticker hero-sticker-2"
+              {...fadeIn(0.9)} whileHover={{ scale: 1.5, rotate: -10, y: -15, zIndex: 10 }} whileTap={{ scale: 0.9 }}
               onClick={playSqueak} onMouseEnter={playHover} />
-            <motion.img src="/images/petra_icons/pinguin.png" alt="Pinguin" className="sticker hero-sticker-3"
-              {...fadeIn(1.0)} whileHover={{ scale: 1.3, rotate: 8, y: -12 }} whileTap={{ scale: 0.8 }}
+            <motion.img src="/images/stickers/pinguin.png" alt="Pinguin" className="sticker hero-sticker-3"
+              {...fadeIn(1.0)} whileHover={{ scale: 1.5, rotate: 8, y: -12, zIndex: 10 }} whileTap={{ scale: 0.9 }}
               onClick={playSqueak} onMouseEnter={playHover} />
           </div>
         </div>
@@ -77,7 +76,7 @@ const Home = () => {
       {/* ======= DIVIDER ======= */}
       <div className="divider-row">
         <span className="divider-line" />
-        <motion.img src="/images/petra_icons/panda_grid.png" alt="" className="divider-icon" {...fadeIn()} />
+        <motion.img src="/images/stickers/clover.png" alt="" className="divider-icon" {...fadeIn()} />
         <span className="divider-line" />
       </div>
 
@@ -95,8 +94,8 @@ const Home = () => {
               <div className="craft-photo"><img src="/images/IMG_4393.jpg" alt="Geldautomat" /></div>
               <span className="scrap-caption">Geldautomat</span>
             </div>
-            <motion.img src="/images/petra_icons/petra_giraffe.png" alt="" className="sticker about-sticker"
-              whileHover={{ scale: 1.3, rotate: 8 }} onClick={playSqueak} onMouseEnter={playHover} />
+            <motion.img src="/images/stickers/petra_giraffe.png" alt="" className="sticker about-sticker"
+              whileHover={{ scale: 1.5, rotate: 8, zIndex: 10 }} onClick={playSqueak} onMouseEnter={playHover} />
           </motion.div>
 
           <motion.div className="about-words" {...fadeIn(0.2)}>
@@ -113,7 +112,7 @@ const Home = () => {
       {/* ======= DIVIDER ======= */}
       <div className="divider-row">
         <span className="divider-line" />
-        <motion.img src="/images/petra_icons/loewe.png" alt="" className="divider-icon" {...fadeIn()} />
+        <motion.img src="/images/stickers/clover.png" alt="" className="divider-icon" {...fadeIn()} />
         <span className="divider-line" />
       </div>
 
@@ -123,19 +122,19 @@ const Home = () => {
 
         <div className="scrapbook-page">
           {[
-            { img: '/images/IMG_4392.jpg', cap: 'Krokodil-Box', rot: -3, sticker: '/images/petra_icons/waschbaer.png', washi: 'washi-green', wr: -4 },
-            { img: '/images/IMG_4391.jpg', cap: 'Schlangen-Bild', rot: 2, sticker: '/images/petra_icons/graue_katze.png', washi: 'washi-gold', wr: 6 },
-            { img: '/images/IMG_4388.jpg', cap: 'Gutschein-Katze', rot: -1, sticker: '/images/petra_icons/rosa_fox.png', washi: 'washi-pink', wr: -3 },
-            { img: '/images/IMG_4390.jpg', cap: 'Alles Liebe!', rot: 3, sticker: '/images/petra_icons/rosa_reh.png', washi: 'washi-green', wr: 5 },
-            { img: '/images/IMG_4384.jpg', cap: 'DIY Geschenkidee', rot: -2, sticker: '/images/petra_icons/elefant.png', washi: 'washi-gold', wr: -7 },
-            { img: '/images/IMG_4394.jpg', cap: 'Windel-Panda', rot: 1, sticker: '/images/petra_icons/pink_baer.png', washi: 'washi-pink', wr: 4 },
+            { img: '/images/IMG_4392.jpg', cap: 'Krokodil-Box', rot: -3, sticker: '/images/stickers/waschbaer.png', washi: 'washi-green', wr: -4 },
+            { img: '/images/IMG_4391.jpg', cap: 'Schlangen-Bild', rot: 2, sticker: '/images/stickers/graue_katze.png', washi: 'washi-gold', wr: 6 },
+            { img: '/images/IMG_4388.jpg', cap: 'Gutschein-Katze', rot: -1, sticker: '/images/stickers/rosa_fuchs.png', washi: 'washi-pink', wr: -3 },
+            { img: '/images/IMG_4390.jpg', cap: 'Alles Liebe!', rot: 3, sticker: '/images/stickers/rosa_reh.png', washi: 'washi-green', wr: 5 },
+            { img: '/images/IMG_4384.jpg', cap: 'DIY Geschenkidee', rot: -2, sticker: '/images/stickers/elefant.png', washi: 'washi-gold', wr: -7 },
+            { img: '/images/IMG_4394.jpg', cap: 'Windel-Panda', rot: 1, sticker: '/images/stickers/pink_baer.png', washi: 'washi-pink', wr: 4 },
           ].map((item, i) => (
             <motion.div
               key={i}
               className="scrap-photo sc-card"
               style={{ '--rot': `${item.rot}deg` }}
               {...fadeIn(i * 0.1)}
-              whileHover={{ rotate: 0, scale: 1.06, zIndex: 10, y: -14 }}
+              whileHover={{ rotate: 0, scale: 1.1, zIndex: 10, y: -14 }}
               onClick={playPop}
               onMouseEnter={playHover}
             >
@@ -143,7 +142,7 @@ const Home = () => {
               <div className="craft-photo"><img src={item.img} alt={item.cap} /></div>
               <span className="scrap-caption">{item.cap}</span>
               <motion.img src={item.sticker} alt="" className="sticker card-sticker"
-                whileHover={{ scale: 1.4, rotate: 12 }} onClick={(e) => { e.stopPropagation(); playSqueak(); }} />
+                whileHover={{ scale: 1.6, rotate: 12 }} onClick={(e) => { e.stopPropagation(); playSqueak(); }} />
             </motion.div>
           ))}
         </div>
@@ -152,7 +151,7 @@ const Home = () => {
       {/* ======= DIVIDER ======= */}
       <div className="divider-row">
         <span className="divider-line" />
-        <motion.img src="/images/petra_icons/weisse_katze.png" alt="" className="divider-icon" {...fadeIn()} />
+        <motion.img src="/images/stickers/clover.png" alt="" className="divider-icon" {...fadeIn()} />
         <span className="divider-line" />
       </div>
 
@@ -173,7 +172,7 @@ const Home = () => {
             <h2>Mehr auf Instagram</h2>
             <p>Folge mir für neue DIY-Ideen, Bastel-Reels und süße Überraschungen!</p>
             <a href="https://www.instagram.com/klebensfroh/" target="_blank" rel="noreferrer" className="btn-craft" onClick={playChime}>
-              <img src="/images/petra_icons/petra_cat.png" alt="" className="btn-sticker" />
+              <img src="/images/stickers/petra_cat.png" alt="" className="btn-sticker" />
               @klebensfroh folgen
             </a>
           </div>
