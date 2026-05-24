@@ -1,75 +1,68 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { playPop, playHover, playChime } from '../sounds';
+import { playPop, playHover, playChime, playSqueak } from '../sounds';
 import './Gallery.css';
 
 const works = [
-  { id: 1, img: '/images/IMG_4386.jpg', title: 'Bärentüte', desc: 'Vesper-Tüte mit handgemaltem Polizisten-Bär', icon: '/images/icon_bear.png' },
-  { id: 2, img: '/images/IMG_4387.jpg', title: 'Giraffen-Tüte', desc: 'Tüte verwandelt sich in kleine Giraffe', icon: '/images/icon_giraffe.png' },
-  { id: 3, img: '/images/IMG_4388.jpg', title: 'Gutschein-Katze', desc: 'Leoparden-Verpackung mit Katzengesicht', icon: '/images/icon_cat.png' },
-  { id: 4, img: '/images/IMG_4391.jpg', title: 'Schlangen-Bild', desc: 'Handgemalte Schlange im Karton-Rahmen', icon: '/images/icon_panda.png' },
-  { id: 5, img: '/images/IMG_4392.jpg', title: 'Krokodil-Box', desc: 'Geburtstags-Box mit Krokodil-Motiv', icon: '/images/icon_giraffe.png' },
-  { id: 6, img: '/images/IMG_4393.jpg', title: 'Geldautomat', desc: 'Geldgeschenk-Automat aus Karton', icon: '/images/icon_bear.png' },
-  { id: 7, img: '/images/IMG_4384.jpg', title: 'DIY Geschenkidee', desc: '2-in-1 Geldgeschenk mit Eukalyptus', icon: '/images/icon_bunny.png' },
-  { id: 8, img: '/images/IMG_4390.jpg', title: 'Alles Liebe', desc: 'Herz-Box mit Juteschnur und Schleife', icon: '/images/icon_bunny.png' },
-  { id: 9, img: '/images/IMG_4378.jpg', title: 'Logo auf Leinwand', desc: 'Das Original Klebensfroh-Logo', icon: '/images/clover_generated.png' },
-  { id: 10, img: '/images/IMG_4394.jpg', title: 'Windel-Panda', desc: 'Süßer Panda aus Windeln', icon: '/images/icon_panda.png' },
-  { id: 11, img: '/images/IMG_4383.jpg', title: 'Petras Bastelwelt', desc: 'Liebe Grüße aus der Werkstatt', icon: '/images/icon_cat.png' },
-  { id: 12, img: '/images/IMG_4381.jpg', title: 'Instagram Übersicht', desc: 'Alle DIY-Ideen auf einen Blick', icon: '/images/icon_bear.png' },
-  { id: 13, img: '/images/IMG_4382.jpg', title: 'Mehr Inspirationen', desc: 'Pandas, Bärchen und Häschen', icon: '/images/icon_panda.png' },
+  { id: 1, img: '/images/IMG_4386.jpg', title: 'Bärentüte', desc: 'Vesper-Tüte mit Polizisten-Bär', sticker: '/images/petra_icons/petra_panda.png', rot: -2 },
+  { id: 2, img: '/images/IMG_4387.jpg', title: 'Giraffen-Tüte', desc: 'Papiertüte als Giraffe', sticker: '/images/petra_icons/petra_giraffe.png', rot: 3 },
+  { id: 3, img: '/images/IMG_4388.jpg', title: 'Gutschein-Katze', desc: 'Leoparden-Verpackung', sticker: '/images/petra_icons/graue_katze.png', rot: -1 },
+  { id: 4, img: '/images/IMG_4391.jpg', title: 'Schlangen-Bild', desc: 'Handgemalte Schlange im Rahmen', sticker: '/images/petra_icons/loewe.png', rot: 2 },
+  { id: 5, img: '/images/IMG_4392.jpg', title: 'Krokodil-Box', desc: 'Geburtstags-Box mit Krokodil', sticker: '/images/petra_icons/waschbaer.png', rot: -3 },
+  { id: 6, img: '/images/IMG_4393.jpg', title: 'Geldautomat', desc: 'Geldgeschenk aus Karton', sticker: '/images/petra_icons/elefant.png', rot: 1 },
+  { id: 7, img: '/images/IMG_4384.jpg', title: 'DIY Geschenkidee', desc: '2-in-1 Geldgeschenk', sticker: '/images/petra_icons/rosa_reh.png', rot: -2 },
+  { id: 8, img: '/images/IMG_4390.jpg', title: 'Alles Liebe', desc: 'Herz-Box mit Schleife', sticker: '/images/petra_icons/rosa_fox.png', rot: 3 },
+  { id: 9, img: '/images/IMG_4378.jpg', title: 'Logo auf Leinwand', desc: 'Das Original-Logo', sticker: '/images/petra_icons/panda_grid.png', rot: 0 },
+  { id: 10, img: '/images/IMG_4394.jpg', title: 'Windel-Panda', desc: 'Panda aus Windeln', sticker: '/images/petra_icons/pink_baer.png', rot: -1 },
+  { id: 11, img: '/images/IMG_4383.jpg', title: 'Petras Bastelwelt', desc: 'Die Werkstatt', sticker: '/images/petra_icons/weisse_katze.png', rot: 2 },
+  { id: 12, img: '/images/IMG_4381.jpg', title: 'Instagram-Feed', desc: 'Alle Ideen auf einen Blick', sticker: '/images/petra_icons/pinguin.png', rot: -3 },
 ];
 
 const Gallery = () => {
-  const [selected, setSelected] = useState(null);
-
-  const openLightbox = (w) => { setSelected(w); playChime(); };
-  const closeLightbox = () => { setSelected(null); playPop(); };
+  const [sel, setSel] = useState(null);
 
   return (
-    <motion.div className="gallery container" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-      <h2 className="sec-title">
+    <motion.div className="gallery container" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+      <motion.h2 className="showcase-title" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
         Galerie
-        <img src="/images/clover_generated.png" alt="" className="title-clover" />
-      </h2>
-      <p className="gallery-intro">
-        Klick auf ein Bild, um es größer zu sehen. Jedes Stück ist ein handgemachtes Unikat!
-      </p>
+      </motion.h2>
+      <p className="gallery-sub">Klick auf ein Bild, um es genauer anzuschauen</p>
 
-      <div className="gallery-masonry">
+      <div className="gallery-scrapbook">
         {works.map((w, i) => (
           <motion.div
             key={w.id}
-            className="photo-card gallery-card"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            className="scrap-photo gal-card"
+            style={{ '--rot': `${w.rot}deg` }}
+            initial={{ opacity: 0, y: 50, rotate: w.rot * 2 }}
+            whileInView={{ opacity: 1, y: 0, rotate: w.rot }}
             viewport={{ once: true, margin: '-30px' }}
-            transition={{ delay: (i % 3) * 0.1, duration: 0.55 }}
-            whileHover={{ y: -10 }}
-            onClick={() => openLightbox(w)}
+            transition={{ delay: (i % 3) * 0.08, duration: 0.5 }}
+            whileHover={{ rotate: 0, scale: 1.05, y: -12, zIndex: 10 }}
+            onClick={() => { setSel(w); playChime(); }}
             onMouseEnter={playHover}
           >
-            <div className="gallery-img-wrap">
-              <img src={w.img} alt={w.title} loading="lazy" />
-              <img src={w.icon} alt="" className="gallery-badge" />
-            </div>
-            <div className="card-label">{w.title}</div>
+            <div className={`washi ${['washi-green','washi-gold','washi-pink'][i % 3]}`}
+              style={{ top: -10, left: 20 + (i % 4) * 10, transform: `rotate(${(i % 2 ? 5 : -5)}deg)` }} />
+            <div className="craft-photo"><img src={w.img} alt={w.title} loading="lazy" /></div>
+            <span className="scrap-caption">{w.title}</span>
+            <motion.img src={w.sticker} alt="" className="sticker gal-sticker"
+              whileHover={{ scale: 1.4, rotate: 12 }}
+              onClick={(e) => { e.stopPropagation(); playSqueak(); }} />
           </motion.div>
         ))}
       </div>
 
       <AnimatePresence>
-        {selected && (
-          <motion.div className="lightbox" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={closeLightbox}>
-            <motion.div className="lightbox-inner" initial={{ scale: 0.85, y: 30 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.85, y: 30 }} onClick={(e) => e.stopPropagation()}>
-              <img src={selected.img} alt={selected.title} className="lightbox-img" />
-              <div className="lightbox-info">
-                <img src={selected.icon} alt="" className="lightbox-badge" />
-                <div>
-                  <h3>{selected.title}</h3>
-                  <p>{selected.desc}</p>
-                </div>
+        {sel && (
+          <motion.div className="lb" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => { setSel(null); playPop(); }}>
+            <motion.div className="lb-card" initial={{ scale: 0.85 }} animate={{ scale: 1 }} exit={{ scale: 0.85 }} onClick={(e) => e.stopPropagation()}>
+              <div className="craft-photo lb-photo"><img src={sel.img} alt={sel.title} /></div>
+              <div className="lb-body">
+                <img src={sel.sticker} alt="" className="lb-sticker" />
+                <div><h3>{sel.title}</h3><p>{sel.desc}</p></div>
               </div>
-              <button className="lightbox-x" onClick={closeLightbox}>✕</button>
+              <button className="lb-close" onClick={() => { setSel(null); playPop(); }}>✕</button>
             </motion.div>
           </motion.div>
         )}

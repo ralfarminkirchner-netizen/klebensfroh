@@ -1,30 +1,13 @@
 import { Outlet, NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { playPop, playHover } from '../sounds';
+import FloatingCharacters from './FloatingCharacters';
+import { playPop, playHover, playSqueak } from '../sounds';
 import './Layout.css';
-
-const navItems = [
-  { to: '/', label: 'Startseite', icon: '/images/clover_generated.png', end: true },
-  { to: '/galerie', label: 'Galerie', icon: '/images/icon_bear.png' },
-  { to: '/auftraege', label: 'Aufträge', icon: '/images/icon_bunny.png' },
-];
 
 const Layout = () => {
   return (
     <div className="site">
-      {/* Fairy light dots */}
-      {[...Array(18)].map((_, i) => (
-        <div
-          key={i}
-          className="fairy-dot"
-          style={{
-            top: `${5 + Math.random() * 90}%`,
-            left: `${3 + Math.random() * 94}%`,
-            animationDelay: `${i * 0.35}s`,
-            animationDuration: `${2 + Math.random() * 2.5}s`,
-          }}
-        />
-      ))}
+      <FloatingCharacters />
 
       <motion.header
         className="site-header"
@@ -34,52 +17,77 @@ const Layout = () => {
       >
         <div className="container header-row">
           <NavLink to="/" className="logo-group" onClick={playPop}>
-            <img src="/images/IMG_4378.jpg" alt="Klebensfroh" className="logo-photo" />
-            <div className="logo-words">
-              <span className="logo-name">Klebensfroh</span>
-              <span className="logo-sub">Glück selbermachen</span>
+            <img src="/images/petra_icons/petra_logo.png" alt="Klebensfroh" className="logo-img" />
+            <div>
+              <div className="logo-name">Klebensfroh</div>
+              <div className="logo-sub">Glück selbermachen</div>
             </div>
           </NavLink>
 
           <nav className="nav-bar">
-            {navItems.map((n) => (
+            {[
+              { to: '/', label: 'Startseite', icon: '/images/petra_icons/petra_panda.png', end: true },
+              { to: '/galerie', label: 'Galerie', icon: '/images/petra_icons/loewe.png' },
+              { to: '/auftraege', label: 'Aufträge', icon: '/images/petra_icons/weisse_katze.png' },
+            ].map((n) => (
               <NavLink
                 key={n.to}
                 to={n.to}
                 end={n.end}
-                className={({ isActive }) => `nav-btn ${isActive ? 'active' : ''}`}
+                className={({ isActive }) => `nav-pill ${isActive ? 'active' : ''}`}
                 onMouseEnter={playHover}
                 onClick={playPop}
               >
-                <img src={n.icon} alt="" className="nav-icon" />
-                <span>{n.label}</span>
+                <img src={n.icon} alt="" className="nav-sticker" />
+                {n.label}
               </NavLink>
             ))}
           </nav>
         </div>
       </motion.header>
 
-      <main className="main-area">
+      <main style={{ position: 'relative', zIndex: 1 }}>
         <Outlet />
       </main>
 
       <footer className="site-footer">
-        <img src="/images/divider.png" alt="" className="section-divider" />
-        <div className="container footer-row">
-          <p className="footer-text">Handgemacht mit Liebe von Petra Kirchner</p>
-          <div className="footer-links">
-            <a href="https://www.instagram.com/klebensfroh/" target="_blank" rel="noreferrer" className="footer-social" onMouseEnter={playHover}>
-              <img src="/images/icon_cat.png" alt="" className="social-icon" />
-              Instagram
-            </a>
-            <a href="https://www.tiktok.com/@klebensfroh" target="_blank" rel="noreferrer" className="footer-social" onMouseEnter={playHover}>
-              <img src="/images/icon_panda.png" alt="" className="social-icon" />
-              TikTok
-            </a>
-            <a href="https://www.facebook.com/klebensfroh" target="_blank" rel="noreferrer" className="footer-social" onMouseEnter={playHover}>
-              <img src="/images/icon_giraffe.png" alt="" className="social-icon" />
-              Facebook
-            </a>
+        <div className="divider-row">
+          <span className="divider-line" />
+          <img src="/images/clover_generated.png" alt="" className="divider-icon" />
+          <span className="divider-line" />
+        </div>
+
+        {/* Petra's character parade */}
+        <div className="container">
+          <div className="parade">
+            {['graue_katze','elefant','reh','rosa_reh','zebra','kamel','panda_grid','loewe','wal','wolke','weisse_katze','waschbaer','rosa_fox','pinguin','pink_baer','kuh','giraffe_grid'].map((a) => (
+              <motion.img
+                key={a}
+                src={`/images/petra_icons/${a}.png`}
+                alt=""
+                className="sticker parade-item"
+                whileHover={{ scale: 1.4, rotate: 10, y: -12 }}
+                whileTap={{ scale: 0.8 }}
+                onClick={playSqueak}
+                onMouseEnter={playHover}
+              />
+            ))}
+          </div>
+
+          <div className="footer-bottom">
+            <p className="footer-love">Handgemacht mit Liebe von Petra Kirchner</p>
+            <div className="footer-socials">
+              {[
+                { url: 'https://www.instagram.com/klebensfroh/', label: 'Instagram', icon: '/images/petra_icons/petra_cat.png' },
+                { url: 'https://www.tiktok.com/@klebensfroh', label: 'TikTok', icon: '/images/petra_icons/petra_panda.png' },
+                { url: 'https://www.facebook.com/klebensfroh', label: 'Facebook', icon: '/images/petra_icons/petra_giraffe.png' },
+              ].map((s) => (
+                <a key={s.label} href={s.url} target="_blank" rel="noreferrer" className="social-link" onMouseEnter={playHover}>
+                  <img src={s.icon} alt="" className="social-sticker" />
+                  {s.label}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </footer>
