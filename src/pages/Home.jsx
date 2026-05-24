@@ -1,205 +1,181 @@
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { playPop, playSqueak, playChime, playHover } from '../sounds';
 import './Home.css';
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: (i = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: i * 0.15, duration: 0.7, ease: [0.23, 1, 0.32, 1] },
+  hidden: { opacity: 0, y: 50 },
+  visible: (d = 0) => ({
+    opacity: 1, y: 0,
+    transition: { delay: d * 0.18, duration: 0.7, ease: [0.23, 1, 0.32, 1] },
   }),
 };
 
+/* Clickable character with sound + bounce */
+const Character = ({ src, alt, className, delay = 0 }) => (
+  <motion.img
+    src={src}
+    alt={alt}
+    className={`floating-character ${className}`}
+    initial={{ y: 40, opacity: 0, scale: 0.7, rotate: -10 }}
+    animate={{ y: 0, opacity: 1, scale: 1, rotate: 0 }}
+    transition={{ delay, duration: 0.6, type: 'spring', stiffness: 200 }}
+    whileHover={{ y: -20, scale: 1.2, rotate: 8 }}
+    whileTap={{ scale: 0.85 }}
+    onClick={playSqueak}
+    onMouseEnter={playHover}
+  />
+);
+
 const Home = () => {
   const { scrollYProgress } = useScroll();
-  const parallax1 = useTransform(scrollYProgress, [0, 1], [0, -120]);
-  const parallax2 = useTransform(scrollYProgress, [0, 1], [0, -60]);
+  const p1 = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const p2 = useTransform(scrollYProgress, [0, 1], [0, -60]);
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.6 }}
-    >
-      {/* ====== HERO ====== */}
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+
+      {/* ===== HERO ===== */}
       <section className="hero">
         <div className="container hero-grid">
           <motion.div className="hero-text" variants={fadeUp} initial="hidden" animate="visible">
             <motion.h1 custom={0} variants={fadeUp}>
-              Glück selbermachen 🍀
+              Glück selbermachen
+              <img src="/images/clover_generated.png" alt="" className="inline-clover" />
             </motion.h1>
             <motion.p custom={1} variants={fadeUp} className="hero-desc">
-              Willkommen bei Klebensfroh! Ich bin Petra und ich verwandle Pappe,
-              Papier und ein großes Herz in kleine Kunstwerke, die Freude schenken.
+              Willkommen bei Klebensfroh! Ich bin Petra und verwandle Pappe,
+              Papier und ganz viel Herz in kleine Kunstwerke, die Freude schenken.
               Jedes Stück ist ein Unikat – genau wie du.
             </motion.p>
-            <motion.div custom={2} variants={fadeUp} className="hero-buttons">
-              <Link to="/galerie" className="btn-craft">🖼️ Zur Galerie</Link>
-              <Link to="/auftraege" className="btn-craft-outline">✉️ Auftrag anfragen</Link>
+            <motion.div custom={2} variants={fadeUp} className="hero-btns">
+              <Link to="/galerie" className="btn-primary" onClick={playChime}>
+                <img src="/images/icon_bear.png" alt="" className="btn-icon" /> Zur Galerie
+              </Link>
+              <Link to="/auftraege" className="btn-outline" onClick={playPop}>
+                <img src="/images/icon_bunny.png" alt="" className="btn-icon" /> Auftrag anfragen
+              </Link>
             </motion.div>
           </motion.div>
 
           <div className="hero-photos">
-            {/* Main hero photo - the iconic bear bag */}
-            <motion.div
-              className="polaroid hero-polaroid-main"
-              style={{ y: parallax1 }}
-              initial={{ opacity: 0, rotate: 6, scale: 0.9 }}
-              animate={{ opacity: 1, rotate: 3, scale: 1 }}
+            <motion.div className="photo-card hero-card-main" style={{ y: p1 }}
+              initial={{ opacity: 0, rotate: 5, scale: 0.9 }}
+              animate={{ opacity: 1, rotate: 2, scale: 1 }}
               transition={{ delay: 0.3, duration: 0.8 }}
-              whileHover={{ rotate: 0, scale: 1.03 }}
+              whileHover={{ rotate: 0, scale: 1.04 }}
+              onClick={playPop}
             >
-              <img src="/images/IMG_4386.jpg" alt="Bärentüte mit Eukalyptus und Lichterketten" />
-              <span className="polaroid-label">Für dich gebastelt 💕</span>
+              <img src="/images/IMG_4386.jpg" alt="Bärentüte" />
+              <div className="card-label">Vesper-Tüte mit Polizisten-Bär</div>
             </motion.div>
 
-            {/* Secondary photo - the giraffe bag */}
-            <motion.div
-              className="polaroid hero-polaroid-secondary"
-              style={{ y: parallax2 }}
-              initial={{ opacity: 0, rotate: -8, scale: 0.85 }}
-              animate={{ opacity: 1, rotate: -5, scale: 1 }}
+            <motion.div className="photo-card hero-card-small" style={{ y: p2 }}
+              initial={{ opacity: 0, rotate: -6, scale: 0.85 }}
+              animate={{ opacity: 1, rotate: -3, scale: 1 }}
               transition={{ delay: 0.6, duration: 0.8 }}
-              whileHover={{ rotate: -1, scale: 1.03 }}
+              whileHover={{ rotate: 0, scale: 1.04 }}
+              onClick={playPop}
             >
-              <img src="/images/IMG_4387.jpg" alt="Giraffen-Geschenktüte" />
-              <span className="polaroid-label">Kleine Giraffe 🦒</span>
+              <img src="/images/IMG_4387.jpg" alt="Giraffen-Tüte" />
+              <div className="card-label">Kleine Giraffe</div>
             </motion.div>
 
-            {/* Her drawn panda peeking */}
-            <motion.img
-              src="/images/Bild 06.04.26 um 15.49.png"
-              alt="Petras handgezeichneter Panda"
-              className="peek-character peek-panda"
-              initial={{ y: 30, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 1, duration: 0.6 }}
-              whileHover={{ y: -15, rotate: 8, scale: 1.1 }}
-            />
-
-            {/* Her drawn cat peeking */}
-            <motion.img
-              src="/images/Bild 06.04.26 um 15.50.png"
-              alt="Petras handgezeichnete Katze"
-              className="peek-character peek-cat"
-              initial={{ y: 30, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 1.2, duration: 0.6 }}
-              whileHover={{ y: -15, rotate: -8, scale: 1.1 }}
-            />
+            {/* Her characters peeking & squeaking */}
+            <Character src="/images/icon_panda.png" alt="Panda" className="peek-panda" delay={1.0} />
+            <Character src="/images/icon_cat.png" alt="Katze" className="peek-cat" delay={1.2} />
           </div>
         </div>
       </section>
 
-      {/* ====== DIVIDER ====== */}
       <img src="/images/divider.png" alt="" className="section-divider" />
 
-      {/* ====== ABOUT PETRA ====== */}
+      {/* ===== ABOUT ===== */}
       <section className="about container">
-        <motion.div
-          className="about-grid"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-100px' }}
-        >
-          <motion.div className="about-photo-stack" variants={fadeUp} custom={0}>
-            <div className="polaroid about-polaroid-1">
-              <img src="/images/IMG_4383.jpg" alt="Petra in ihrer Bastelwelt" />
-              <span className="polaroid-label">Meine Bastelwelt 🌿</span>
+        <motion.div className="about-content" initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-80px' }}>
+          <motion.div className="about-photos" variants={fadeUp} custom={0}>
+            <div className="photo-card about-photo-1">
+              <img src="/images/IMG_4383.jpg" alt="Petra" />
+              <div className="card-label">Meine Bastelwelt</div>
             </div>
-            <div className="polaroid about-polaroid-2">
-              <img src="/images/IMG_4393.jpg" alt="Geldautomat aus Pappe" />
-              <span className="polaroid-label">Geldautomat 💰</span>
+            <div className="photo-card about-photo-2">
+              <img src="/images/IMG_4393.jpg" alt="Geldautomat" />
+              <div className="card-label">Geldautomat aus Karton</div>
             </div>
           </motion.div>
-
           <motion.div className="about-text" variants={fadeUp} custom={1}>
-            <h2>Liebe Grüße aus meiner kleinen Bastelwelt 🌿🐯</h2>
-            <p>
-              Ich bin Petra – und hinter Klebensfroh steckt meine ganze Leidenschaft
-              für alles, was man mit den Händen erschaffen kann. Ob süße Tier-Verpackungen,
-              handbemalte Spardosen, Oster-Häschen aus Socken oder ein Geldautomat aus
-              Karton – bei mir wird nichts weggeworfen, sondern verwandelt.
-            </p>
-            <p>
-              Jedes meiner Stücke entsteht mit Liebe zum Detail, einem Augenzwinkern
-              und dem Glauben, dass kleine Dinge große Freude machen können.
-            </p>
+            <h2>Liebe Grüße aus meiner kleinen Bastelwelt</h2>
+            <p>Ich bin Petra – und hinter Klebensfroh steckt meine ganze Leidenschaft.
+            Ob süße Tier-Verpackungen, Oster-Häschen aus Socken, handbemalte Spardosen
+            oder ein Geldautomat aus Karton – bei mir wird nichts weggeworfen, sondern verwandelt.</p>
+            <p>Jedes Stück entsteht mit Liebe zum Detail und dem Glauben, dass kleine Dinge
+            große Freude machen können.</p>
+            <div className="about-characters">
+              <img src="/images/icon_panda.png" alt="" className="char-icon" onClick={playSqueak} onMouseEnter={playHover} />
+              <img src="/images/icon_cat.png" alt="" className="char-icon" onClick={playSqueak} onMouseEnter={playHover} />
+              <img src="/images/icon_bear.png" alt="" className="char-icon" onClick={playSqueak} onMouseEnter={playHover} />
+              <img src="/images/icon_giraffe.png" alt="" className="char-icon" onClick={playSqueak} onMouseEnter={playHover} />
+              <img src="/images/icon_bunny.png" alt="" className="char-icon" onClick={playSqueak} onMouseEnter={playHover} />
+            </div>
           </motion.div>
         </motion.div>
       </section>
 
-      {/* ====== DIVIDER ====== */}
       <img src="/images/divider.png" alt="" className="section-divider" />
 
-      {/* ====== SHOWCASE GRID ====== */}
+      {/* ===== SHOWCASE ===== */}
       <section className="showcase container">
-        <motion.h2
-          className="section-title"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          Frisch aus der Werkstatt ✂️
+        <motion.h2 className="sec-title" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+          Frisch aus der Werkstatt
+          <img src="/images/clover_generated.png" alt="" className="title-clover" />
         </motion.h2>
 
         <div className="showcase-grid">
           {[
-            { img: '/images/IMG_4392.jpg', label: 'Krokodil-Box 🐊', rotate: 2 },
-            { img: '/images/IMG_4391.jpg', label: 'Schlangen-Bild 🐍', rotate: -3 },
-            { img: '/images/IMG_4388.jpg', label: 'Gutschein-Katze 🐱', rotate: 1 },
-            { img: '/images/IMG_4390.jpg', label: 'Alles Liebe! 💛', rotate: -2 },
-            { img: '/images/IMG_4384.jpg', label: 'DIY Geschenkidee 🎁', rotate: 3 },
-            { img: '/images/IMG_4394.jpg', label: 'Windel-Panda 🐼', rotate: -1 },
+            { img: '/images/IMG_4392.jpg', label: 'Krokodil-Box', icon: '/images/icon_giraffe.png' },
+            { img: '/images/IMG_4391.jpg', label: 'Schlangen-Bild', icon: '/images/icon_cat.png' },
+            { img: '/images/IMG_4388.jpg', label: 'Gutschein-Katze', icon: '/images/icon_cat.png' },
+            { img: '/images/IMG_4390.jpg', label: 'Alles Liebe!', icon: '/images/icon_bunny.png' },
+            { img: '/images/IMG_4384.jpg', label: 'DIY Geschenkidee', icon: '/images/icon_bear.png' },
+            { img: '/images/IMG_4394.jpg', label: 'Windel-Panda', icon: '/images/icon_panda.png' },
           ].map((item, i) => (
             <motion.div
               key={i}
-              className="polaroid showcase-card"
-              style={{ '--card-rotate': `${item.rotate}deg` }}
-              initial={{ opacity: 0, y: 50, rotate: item.rotate * 2 }}
-              whileInView={{ opacity: 1, y: 0, rotate: item.rotate }}
-              viewport={{ once: true, margin: '-50px' }}
-              transition={{ delay: i * 0.1, duration: 0.6 }}
-              whileHover={{ rotate: 0, scale: 1.05, zIndex: 10 }}
+              className="photo-card showcase-card"
+              initial={{ opacity: 0, y: 60 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ delay: (i % 3) * 0.12, duration: 0.6 }}
+              whileHover={{ y: -12 }}
+              onClick={playPop}
+              onMouseEnter={playHover}
             >
-              <img src={item.img} alt={item.label} />
-              <span className="polaroid-label">{item.label}</span>
+              <div className="showcase-img-wrap">
+                <img src={item.img} alt={item.label} />
+                <img src={item.icon} alt="" className="showcase-badge" />
+              </div>
+              <div className="card-label">{item.label}</div>
             </motion.div>
           ))}
         </div>
       </section>
 
-      {/* ====== DIVIDER ====== */}
       <img src="/images/divider.png" alt="" className="section-divider" />
 
-      {/* ====== INSTAGRAM CTA ====== */}
-      <section className="insta-cta container">
-        <motion.div
-          className="insta-box"
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-        >
-          <div className="insta-collage">
-            <img src="/images/IMG_4381.jpg" alt="Instagram Grid" className="insta-thumb" />
-            <img src="/images/IMG_4382.jpg" alt="Instagram Grid" className="insta-thumb" />
+      {/* ===== INSTAGRAM CTA ===== */}
+      <section className="insta container">
+        <motion.div className="insta-card" initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}>
+          <div className="insta-grid">
+            <img src="/images/IMG_4381.jpg" alt="" className="insta-thumb" onClick={playPop} />
+            <img src="/images/IMG_4382.jpg" alt="" className="insta-thumb" onClick={playPop} />
           </div>
           <div className="insta-text">
-            <h2>Noch mehr auf Instagram 📸</h2>
-            <p>
-              Folge mir auf Instagram für neue DIY-Ideen, Bastel-Reels und kleine
-              Überraschungen! Ich zeige dir Schritt für Schritt, wie du mit einfachen
-              Materialien wunderschöne Dinge erschaffst.
-            </p>
-            <a
-              href="https://www.instagram.com/klebensfroh/"
-              target="_blank"
-              rel="noreferrer"
-              className="btn-craft"
-            >
-              📸 @klebensfroh folgen
+            <h2>Mehr auf Instagram</h2>
+            <p>Folge mir für neue DIY-Ideen, Bastel-Reels und süße Überraschungen!
+            Ich zeige dir, wie du mit einfachen Materialien schöne Dinge erschaffst.</p>
+            <a href="https://www.instagram.com/klebensfroh/" target="_blank" rel="noreferrer"
+               className="btn-primary" onClick={playChime}>
+              <img src="/images/icon_cat.png" alt="" className="btn-icon" /> @klebensfroh folgen
             </a>
           </div>
         </motion.div>

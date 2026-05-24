@@ -1,117 +1,90 @@
 import { motion } from 'framer-motion';
+import { playPop, playHover, playSqueak } from '../sounds';
 import './Shop.css';
+
+const services = [
+  { icon: '/images/icon_bear.png', title: 'Individuelle Tier-Verpackungen', desc: 'Dein Lieblingstier als Geschenktüte oder Box' },
+  { icon: '/images/icon_bunny.png', title: 'Handbemalte Karten & Einladungen', desc: 'Für Geburtstage, Taufen und besondere Anlässe' },
+  { icon: '/images/icon_giraffe.png', title: 'Deko & Aufsteller', desc: 'Kleine Kunstwerke aus Pappe für Kinderzimmer & mehr' },
+  { icon: '/images/icon_panda.png', title: 'Windeltiere', desc: 'Süße Pandas, Bären und mehr aus Windeln' },
+  { icon: '/images/icon_cat.png', title: 'Kreative Geldgeschenke', desc: 'Spardosen & Geldautomaten aus Karton' },
+];
 
 const Shop = () => {
   return (
-    <motion.div
-      className="shop-page container"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
-      <h2 className="section-title">Aufträge & Wünsche ✨</h2>
+    <motion.div className="shop container" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+      <h2 className="sec-title">
+        Aufträge & Wünsche
+        <img src="/images/clover_generated.png" alt="" className="title-clover" />
+      </h2>
 
-      <div className="shop-grid">
-        <motion.div
-          className="shop-showcase"
-          initial={{ x: -30, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ delay: 0.2 }}
-        >
-          <div className="polaroid" style={{ transform: 'rotate(-3deg)' }}>
+      <div className="shop-layout">
+        <motion.div className="shop-left" initial={{ x: -30, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.2 }}>
+          <div className="photo-card shop-hero-photo">
             <img src="/images/IMG_4392.jpg" alt="Krokodil Box" />
-            <span className="polaroid-label">Geschenk-Box Krokodil 🐊</span>
+            <div className="card-label">Dein Wunsch-Tier als Geschenk-Box</div>
           </div>
-          
-          <div className="shop-services">
-            <h3>Was ich für dich basteln kann</h3>
-            <div className="service-list">
-              <div className="service-item">
-                <span className="service-icon">🎨</span>
+
+          <h3 className="services-title">Was ich für dich basteln kann</h3>
+          <div className="service-list">
+            {services.map((s, i) => (
+              <motion.div
+                key={i}
+                className="service-row"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08 }}
+                whileHover={{ x: 6 }}
+                onMouseEnter={playHover}
+                onClick={playSqueak}
+              >
+                <img src={s.icon} alt="" className="service-icon" />
                 <div>
-                  <strong>Individuelle Tier-Verpackungen</strong>
-                  <p>Dein Lieblingstier als Geschenktüte oder Box</p>
+                  <strong>{s.title}</strong>
+                  <p>{s.desc}</p>
                 </div>
-              </div>
-              <div className="service-item">
-                <span className="service-icon">💌</span>
-                <div>
-                  <strong>Handbemalte Karten & Einladungen</strong>
-                  <p>Für Geburtstage, Taufen und besondere Anlässe</p>
-                </div>
-              </div>
-              <div className="service-item">
-                <span className="service-icon">✂️</span>
-                <div>
-                  <strong>Deko & Aufsteller</strong>
-                  <p>Kleine Kunstwerke aus Pappe für Kinderzimmer & mehr</p>
-                </div>
-              </div>
-              <div className="service-item">
-                <span className="service-icon">🐻</span>
-                <div>
-                  <strong>Windeltiere</strong>
-                  <p>Süße Pandas, Bären und mehr aus Windeln</p>
-                </div>
-              </div>
-              <div className="service-item">
-                <span className="service-icon">💰</span>
-                <div>
-                  <strong>Kreative Geldgeschenke</strong>
-                  <p>Spardosen & Geldautomaten aus Karton</p>
-                </div>
-              </div>
-            </div>
+              </motion.div>
+            ))}
           </div>
         </motion.div>
 
-        <motion.div
-          className="shop-form-wrapper"
-          initial={{ x: 30, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ delay: 0.4 }}
-        >
-          <div className="form-card">
-            <h3>Schreib mir eine Nachricht 💌</h3>
-            <p className="form-subtitle">
-              Beschreibe mir deine Idee – ich melde mich so schnell wie möglich!
-            </p>
+        <motion.div className="shop-right" initial={{ x: 30, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.4 }}>
+          <div className="form-box">
+            <h3>Schreib mir eine Nachricht</h3>
+            <p className="form-sub">Beschreibe mir deine Idee – ich melde mich so schnell wie möglich!</p>
             <form onSubmit={(e) => e.preventDefault()}>
-              <div className="form-row">
+              <div className="field">
                 <label>Dein Name</label>
-                <input type="text" className="input-craft" placeholder="Wie darf ich dich nennen?" />
+                <input type="text" className="input-field" placeholder="Wie darf ich dich nennen?" />
               </div>
-              <div className="form-row">
+              <div className="field">
                 <label>Deine E-Mail</label>
-                <input type="email" className="input-craft" placeholder="Wo kann ich dir antworten?" />
+                <input type="email" className="input-field" placeholder="Wo kann ich dir antworten?" />
               </div>
-              <div className="form-row">
+              <div className="field">
                 <label>Anlass</label>
-                <select className="input-craft">
-                  <option>Geburtstag 🎂</option>
-                  <option>Hochzeit 💒</option>
-                  <option>Taufe 👶</option>
-                  <option>Ostern 🐰</option>
-                  <option>Weihnachten 🎄</option>
-                  <option>Einfach so 💕</option>
+                <select className="input-field">
+                  <option>Geburtstag</option>
+                  <option>Hochzeit</option>
+                  <option>Taufe</option>
+                  <option>Ostern</option>
+                  <option>Weihnachten</option>
+                  <option>Einfach so</option>
                 </select>
               </div>
-              <div className="form-row">
+              <div className="field">
                 <label>Deine Idee</label>
-                <textarea
-                  className="input-craft"
-                  rows="5"
-                  placeholder="Beschreibe mir, was du dir wünschst... z.B. 'Eine Krokodil-Box für den 5. Geburtstag meines Sohnes'"
-                ></textarea>
+                <textarea className="input-field" rows="5" placeholder="z.B. 'Eine Krokodil-Box für den 5. Geburtstag meines Sohnes'"></textarea>
               </div>
               <motion.button
                 type="submit"
-                className="btn-craft"
-                style={{ width: '100%', justifyContent: 'center' }}
+                className="btn-primary submit-btn"
                 whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                whileTap={{ scale: 0.97 }}
+                onClick={playPop}
               >
-                ✉️ Nachricht absenden
+                <img src="/images/icon_bunny.png" alt="" className="btn-icon" /> Nachricht absenden
               </motion.button>
             </form>
           </div>
