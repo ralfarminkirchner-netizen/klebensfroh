@@ -1,54 +1,83 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, Star } from 'lucide-react';
+import { motion } from 'framer-motion';
+import AnimalExtracted from '../components/AnimalExtracted';
 import './Home.css';
 
 const Home = () => {
   return (
-    <div className="home-container container">
+    <motion.div 
+      className="home-container container"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.5 }}
+    >
       
-      <section className="hero-section">
+      <section className="hero-section glass-panel">
         <div className="hero-text">
-          <h2 className="page-title">Glück selbermachen ✨</h2>
-          <p className="hero-subtitle">
-            Schön, dass du hier bist! Ich bin Petra und ich liebe es, süße Tierchen, lustige Gesichter und kreative Basteleien aus allen möglichen Materialien zu erschaffen. Willkommen bei Klebensfroh!
-          </p>
-          <div className="hero-actions">
-            <Link to="/galerie" className="cute-button">
+          <motion.h2 
+            className="page-title"
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ type: 'spring', delay: 0.2 }}
+          >
+            Glück selbermachen ✨
+          </motion.h2>
+          <motion.p 
+            className="hero-subtitle"
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.4 }}
+          >
+            Schön, dass du hier bist! Ich bin Petra und ich liebe es, süße Tierchen, lustige Gesichter und kreative Basteleien zu erschaffen. Willkommen in der Welt von Klebensfroh!
+          </motion.p>
+          <motion.div 
+            className="hero-actions"
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.6 }}
+          >
+            <Link to="/galerie" className="glass-button">
               Zur Galerie <ArrowRight size={20} />
             </Link>
-            <Link to="/auftraege" className="cute-button" style={{ backgroundColor: 'var(--color-secondary)', color: 'var(--color-text-main)' }}>
+            <Link to="/auftraege" className="glass-button" style={{ background: 'var(--color-secondary)' }}>
               Eigener Auftrag <Star size={20} />
             </Link>
-          </div>
+          </motion.div>
         </div>
+        
         <div className="hero-image-wrapper">
-          {/* Collage of her crafts/drawings */}
-          <div className="collage-box">
-             <img src="/images/steph_bild_1.jpg" alt="Hund Bastelei" className="polaroid p-1" />
-             <img src="/images/steph_bild_2.jpg" alt="Einhorn" className="polaroid p-2" />
-             <img src="/images/media__1779624826879.jpg" alt="Kleeblatt Tiere" className="polaroid p-3" />
+          <div className="floating-animals">
+            <AnimalExtracted index={0} size={180} delay={0.2} style={{ position: 'absolute', top: '-20px', left: '10%' }} />
+            <AnimalExtracted index={3} size={140} delay={0.4} style={{ position: 'absolute', top: '40%', right: '-10%' }} />
+            <AnimalExtracted index={7} size={200} delay={0.6} style={{ position: 'absolute', bottom: '-20px', left: '30%' }} />
           </div>
         </div>
       </section>
 
       <section className="highlights-section">
-        <h3 style={{ textAlign: 'center', fontSize: '2.5rem', marginBottom: '2rem' }}>Meine kleinen Lieblinge 🐾</h3>
-        <div className="highlights-grid">
-          <div className="cute-card">
-            <h4>Handgezeichnet</h4>
-            <p>Jedes meiner Tiere wird von Hand skizziert und liebevoll mit Farbe zum Leben erweckt.</p>
-          </div>
-          <div className="cute-card">
-            <h4>Kreative Basteleien</h4>
-            <p>Ob Geburtstagseinladungen, Deko oder kleine Geschenke – Pappe und Schere sind meine besten Freunde.</p>
-          </div>
-          <div className="cute-card">
-            <h4>Dein Motiv</h4>
-            <p>Du hast eine ganz eigene Idee? Ich zeichne oder bastle dir dein Wunschmotiv mit ganz viel Herz!</p>
-          </div>
+        <motion.h3 
+          style={{ textAlign: 'center', fontSize: '3rem', marginBottom: '3rem', fontFamily: 'var(--font-hand)' }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+        >
+          Die ganze Tierbande 🐾
+        </motion.h3>
+        
+        <div className="animal-wimmelbild">
+          {[0, 1, 2, 4, 5, 6, 8, 9, 10].map((idx, i) => (
+             <AnimalExtracted 
+                key={idx} 
+                index={idx} 
+                size={Math.random() * 80 + 120} 
+                delay={i * 0.1} 
+                style={{ margin: '10px' }} 
+             />
+          ))}
         </div>
       </section>
-    </div>
+    </motion.div>
   );
 };
 

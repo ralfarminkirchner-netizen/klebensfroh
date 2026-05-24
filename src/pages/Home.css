@@ -1,7 +1,7 @@
 .home-container {
   display: flex;
   flex-direction: column;
-  gap: 60px;
+  gap: 80px;
 }
 
 .hero-section {
@@ -9,19 +9,25 @@
   align-items: center;
   justify-content: space-between;
   gap: 40px;
-  min-height: 50vh;
+  min-height: 60vh;
+  padding: 60px 40px;
+  position: relative;
+  overflow: visible;
 }
 
 .hero-text {
-  flex: 1;
+  flex: 1.2;
   max-width: 600px;
+  z-index: 10;
 }
 
 .hero-subtitle {
-  font-size: 1.4rem;
-  color: var(--color-text-main);
-  margin-bottom: 2rem;
+  font-size: 1.5rem;
+  margin-bottom: 2.5rem;
   line-height: 1.8;
+  font-weight: 600;
+  color: var(--color-text-main);
+  text-shadow: 0 1px 2px rgba(255,255,255,0.8);
 }
 
 .hero-actions {
@@ -31,82 +37,41 @@
 
 .hero-image-wrapper {
   flex: 1;
+  position: relative;
+  height: 400px;
+  perspective: 1000px;
+}
+
+.floating-animals {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+
+.animal-wimmelbild {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-}
-
-.collage-box {
-  position: relative;
-  width: 100%;
-  height: 400px;
-}
-
-.polaroid {
-  position: absolute;
-  background: white;
-  padding: 10px 10px 40px 10px;
-  box-shadow: var(--shadow-soft);
-  border-radius: 4px;
-  max-width: 250px;
-  transition: transform 0.3s, z-index 0.3s;
-  cursor: pointer;
-}
-
-.polaroid:hover {
-  transform: scale(1.05) rotate(0deg) !important;
-  z-index: 10;
-  box-shadow: var(--shadow-hover);
-}
-
-.p-1 {
-  top: 10%;
-  left: 10%;
-  transform: rotate(-10deg);
-  z-index: 1;
-}
-
-.p-2 {
-  top: 30%;
-  right: 10%;
-  transform: rotate(8deg);
-  z-index: 2;
-}
-
-.p-3 {
-  bottom: 0;
-  left: 30%;
-  transform: rotate(-4deg);
-  z-index: 3;
-}
-
-.highlights-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-}
-
-.highlights-grid h4 {
-  font-size: 1.8rem;
-  margin-bottom: 10px;
-  color: var(--color-primary);
-}
-
-.highlights-grid p {
-  font-size: 1.1rem;
+  gap: 20px;
+  padding: 40px;
 }
 
 @media (max-width: 768px) {
   .hero-section {
     flex-direction: column;
     text-align: center;
+    padding: 30px 20px;
   }
   
   .hero-actions {
     justify-content: center;
+    flex-wrap: wrap;
   }
   
-  .collage-box {
+  .hero-image-wrapper {
     height: 300px;
+    width: 100%;
   }
 }
