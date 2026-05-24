@@ -1,120 +1,192 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+
 :root {
-  /* Klebensfroh Instagram Vibe - Eukalyptus & Craft Paper */
-  --color-eucalyptus: #718a73; /* Sage/Eucalyptus green */
-  --color-eucalyptus-dark: #4b634d;
-  --color-eucalyptus-light: #a3bca5;
+  /* Petra's Klebensfroh Palette - extracted from her Instagram photos */
+  --clover-dark: #3a5a3a;
+  --clover: #5a8a5a;
+  --clover-light: #8bb88b;
+  --clover-pale: #c5dcc5;
   
-  --color-paper: #f0ebe1; /* Natural craft paper base */
-  --color-paper-light: #f9f6f0;
-  --color-paper-dark: #d8cbb8;
+  --craft-dark: #a0866a;
+  --craft: #d4c4aa;
+  --craft-light: #f0ebe1;
+  --craft-lightest: #faf8f3;
   
-  --color-text-main: #2a312a; /* Deep forest text */
-  --color-text-light: #5d6b5d;
+  --warm-white: #fdfcf9;
+  --fairy-gold: #ffe8a0;
+  --fairy-glow: rgba(255, 232, 160, 0.6);
+  --heart-pink: #e8a0b4;
   
-  --color-fairy-light: #ffe57f; /* Warm golden glow */
+  --text-dark: #2a312a;
+  --text-body: #4a524a;
+  --text-light: #7a827a;
   
-  --font-script: 'Caveat', cursive; /* Matches her elegant signature */
-  --font-body: 'Lora', serif; /* Elegant, warm serif for readability */
+  --font-hand: 'Caveat', cursive;
+  --font-body: 'Lora', serif;
   
-  --shadow-paper: 0 10px 30px rgba(75, 99, 77, 0.08);
-  --shadow-glow: 0 0 20px rgba(255, 229, 127, 0.4);
+  --radius-soft: 12px;
+  --radius-card: 16px;
+  --shadow-soft: 0 4px 20px rgba(58, 90, 58, 0.08);
+  --shadow-hover: 0 8px 30px rgba(58, 90, 58, 0.15);
+  --shadow-glow: 0 0 40px var(--fairy-glow);
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
 
 body {
   font-family: var(--font-body);
-  color: var(--color-text-main);
-  background-color: var(--color-paper);
-  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+  color: var(--text-body);
+  background-color: var(--craft-lightest);
+  background-image: url('/images/bg_pattern.png');
+  background-size: 400px;
   background-attachment: fixed;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Subtle glowing background lights */
-.fairy-lights-bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -1;
-  background: 
-    radial-gradient(circle at 10% 20%, rgba(255, 229, 127, 0.15), transparent 40%),
-    radial-gradient(circle at 85% 15%, rgba(255, 229, 127, 0.1), transparent 50%),
-    radial-gradient(circle at 50% 80%, rgba(255, 229, 127, 0.12), transparent 40%),
-    radial-gradient(circle at 80% 90%, rgba(163, 188, 165, 0.15), transparent 50%);
-  filter: blur(40px);
-  animation: glow-breathe 8s infinite alternate ease-in-out;
-}
-
-@keyframes glow-breathe {
-  0% { opacity: 0.7; transform: scale(1); }
-  100% { opacity: 1; transform: scale(1.05); }
-}
-
-h1, h2, h3, h4, h5, h6 { 
-  font-family: var(--font-script); 
-  font-weight: 500;
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-hand);
+  color: var(--text-dark);
+  font-weight: 600;
   line-height: 1.1;
 }
 
 a { text-decoration: none; color: inherit; }
-
-/* Craft Paper Element */
-.paper-card {
-  background: var(--color-paper-light);
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  box-shadow: var(--shadow-paper);
-  border-radius: 8px;
-  position: relative;
-  overflow: hidden;
-}
-.paper-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-  pointer-events: none;
-}
-
-/* Elegant Buttons */
-.craft-button {
-  background-color: var(--color-eucalyptus);
-  color: var(--color-paper-light);
-  border: none;
-  box-shadow: 0 4px 10px rgba(113, 138, 115, 0.3);
-  border-radius: 30px;
-  padding: 12px 32px;
-  font-family: var(--font-script);
-  font-size: 1.6rem;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  position: relative;
-}
-
-.craft-button:hover {
-  transform: translateY(-3px) scale(1.02);
-  background-color: var(--color-eucalyptus-dark);
-  box-shadow: 0 6px 15px rgba(113, 138, 115, 0.4);
-}
-
-.page-title {
-  font-size: 4rem;
-  text-align: center;
-  color: var(--color-eucalyptus-dark);
-  margin-bottom: 2rem;
-  position: relative;
-  display: inline-block;
-  left: 50%;
-  transform: translateX(-50%);
-}
+img { max-width: 100%; display: block; }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 24px;
+}
+
+/* ============ FAIRY LIGHT GLOW DOTS ============ */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+.fairy-dot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: var(--fairy-gold);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--fairy-glow), 0 0 20px var(--fairy-glow);
+  animation: twinkle 3s infinite ease-in-out;
+  pointer-events: none;
+}
+
+/* ============ POLAROID CARD ============ */
+.polaroid {
+  background: white;
+  padding: 10px 10px 40px 10px;
+  box-shadow: var(--shadow-soft);
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  position: relative;
+}
+
+.polaroid:hover {
+  box-shadow: var(--shadow-hover);
+}
+
+.polaroid img {
+  width: 100%;
+  height: auto;
+}
+
+.polaroid-label {
+  position: absolute;
+  bottom: 8px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: var(--font-hand);
+  font-size: 1.4rem;
+  color: var(--text-dark);
+}
+
+/* ============ CRAFT BUTTON ============ */
+.btn-craft {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 36px;
+  background: var(--clover);
+  color: white;
+  font-family: var(--font-hand);
+  font-size: 1.6rem;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(90, 138, 90, 0.3);
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  text-decoration: none;
+}
+
+.btn-craft:hover {
+  background: var(--clover-dark);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(90, 138, 90, 0.4);
+}
+
+.btn-craft-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 36px;
+  background: transparent;
+  color: var(--clover-dark);
+  font-family: var(--font-hand);
+  font-size: 1.6rem;
+  border: 2px solid var(--clover-light);
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  text-decoration: none;
+}
+
+.btn-craft-outline:hover {
+  background: var(--clover-pale);
+  border-color: var(--clover);
+  transform: translateY(-3px);
+}
+
+/* ============ SECTION DIVIDER ============ */
+.section-divider {
+  display: block;
+  margin: 0 auto;
+  max-width: 400px;
+  opacity: 0.7;
+}
+
+/* ============ FORM INPUTS ============ */
+.input-craft {
+  width: 100%;
+  padding: 16px 20px;
+  background: white;
+  border: 2px solid var(--craft);
+  border-radius: var(--radius-soft);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--text-dark);
+  outline: none;
+  transition: all 0.3s;
+}
+
+.input-craft:focus {
+  border-color: var(--clover-light);
+  box-shadow: 0 0 0 4px rgba(139, 184, 139, 0.2);
+}
+
+.input-craft::placeholder {
+  color: var(--text-light);
+  font-style: italic;
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 768px) {
+  .container { padding: 0 16px; }
 }
