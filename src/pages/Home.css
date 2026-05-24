@@ -1,7 +1,7 @@
 .home-container {
   display: flex;
   flex-direction: column;
-  gap: 100px;
+  gap: 120px;
   padding-bottom: 50px;
 }
 
@@ -15,18 +15,9 @@
   padding: 40px 0;
 }
 
-.floating-craft-icon {
-  position: absolute;
-  width: 120px;
-  height: auto;
-  z-index: 5;
-  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.1));
-  cursor: pointer;
-}
-
 .hero-text {
   flex: 1;
-  max-width: 550px;
+  max-width: 500px;
   z-index: 10;
 }
 
@@ -41,6 +32,7 @@
   flex: 1;
   display: flex;
   justify-content: center;
+  position: relative;
 }
 
 .polaroid-wrapper {
@@ -52,10 +44,12 @@
   transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   max-width: 400px;
   width: 100%;
+  position: relative;
+  z-index: 2;
 }
 
 .polaroid-wrapper:hover {
-  transform: rotate(-2deg) scale(1.05);
+  transform: rotate(-1deg) scale(1.02);
 }
 
 .hero-img {
@@ -66,7 +60,7 @@
 
 .polaroid-caption {
   font-family: var(--font-script);
-  font-size: 2rem;
+  font-size: 2.2rem;
   text-align: center;
   margin-top: 15px;
   color: var(--color-text-main);
@@ -75,15 +69,50 @@
   width: calc(100% - 30px);
 }
 
-.story-section {
-  padding: 60px;
-  margin: 0 auto;
-  max-width: 800px;
+/* Her cat peeking out from the polaroid */
+.peek-cat {
+  position: absolute;
+  bottom: -40px;
+  right: 10px;
+  width: 150px;
+  height: auto;
+  z-index: 3;
+  filter: drop-shadow(5px 10px 15px rgba(0,0,0,0.2));
+  cursor: pointer;
+  transform-origin: bottom center;
+}
+
+.interactive-scene {
+  padding: 60px 0;
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.story-card {
+  padding: 50px;
+  max-width: 700px;
   text-align: center;
+  position: relative;
+  margin-top: 60px; /* Make room for panda */
+}
+
+/* Her panda resting on top of the text box */
+.rest-panda {
+  position: absolute;
+  top: -90px;
+  left: 50%;
+  margin-left: -75px;
+  width: 150px;
+  height: auto;
+  z-index: 10;
+  filter: drop-shadow(0 15px 15px rgba(0,0,0,0.15));
+  cursor: pointer;
+  transform-origin: bottom center;
 }
 
 .story-content h3 {
-  font-size: 3rem;
+  font-size: 3.5rem;
   margin-bottom: 1.5rem;
   color: var(--color-eucalyptus-dark);
 }
@@ -97,16 +126,17 @@
 
 @media (max-width: 768px) {
   .hero-section {
-    flex-direction: column-reverse;
+    flex-direction: column;
     text-align: center;
     gap: 40px;
   }
-  
-  .floating-craft-icon {
-    display: none; /* Hide on small screens for cleaner layout */
+  .peek-cat {
+    right: -20px;
+    width: 100px;
   }
-  
-  .story-section {
-    padding: 30px 20px;
+  .rest-panda {
+    width: 100px;
+    top: -60px;
+    margin-left: -50px;
   }
 }
