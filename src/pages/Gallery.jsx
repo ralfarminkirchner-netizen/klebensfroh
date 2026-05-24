@@ -1,82 +1,57 @@
 import { useState } from 'react';
-import { Heart } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './Gallery.css';
 
+// Using the newly uploaded high-quality images from Instagram
 const works = [
-  { id: 1, img: '/images/steph_bild_1.jpg', title: 'Hunde-Einladung', category: 'Basteleien' },
-  { id: 2, img: '/images/steph_bild_2.jpg', title: 'Lila Einhorn', category: 'Basteleien' },
-  { id: 3, img: '/images/media__1779624826879.jpg', title: 'Glückstierchen Wimmelbild', category: 'Zeichnungen' },
-  { id: 4, img: '/images/steph_bild_3.jpg', title: 'Elefanten-Gesicht', category: 'Zeichnungen' },
+  { id: 1, img: '/images/IMG_4378.jpg', title: 'Schmetterling Box', category: 'Verpackung' },
+  { id: 2, img: '/images/IMG_4379.jpg', title: 'Geburtstags Karte', category: 'Karten' },
+  { id: 3, img: '/images/IMG_4380.jpg', title: 'Pinguin', category: 'Zeichnung' },
+  { id: 4, img: '/images/IMG_4384.jpg', title: 'Kleeblatt Anhänger', category: 'Dekoration' },
+  { id: 5, img: '/images/IMG_4386.jpg', title: 'Bären Tüte', category: 'Verpackung' },
+  { id: 6, img: '/images/IMG_4391.jpg', title: 'Osterhase', category: 'Dekoration' },
+  { id: 7, img: '/images/IMG_4392.jpg', title: 'Herzlichen Glückwunsch', category: 'Karten' },
+  { id: 8, img: '/images/animal_grid.jpg', title: 'Tier Wimmelbild', category: 'Zeichnung' },
 ];
 
 const Gallery = () => {
-  const [filter, setFilter] = useState('Alle');
   const [selectedId, setSelectedId] = useState(null);
-
-  const filteredWorks = filter === 'Alle' ? works : works.filter(w => w.category === filter);
 
   return (
     <motion.div 
       className="gallery-container container"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.5 }}
+      exit={{ opacity: 0 }}
     >
-      <motion.h2 
-        className="page-title"
-        initial={{ y: -20 }}
-        animate={{ y: 0 }}
-      >
-        Meine Galerie
-      </motion.h2>
-      
-      <div className="filter-buttons">
-        {['Alle', 'Zeichnungen', 'Basteleien'].map(cat => (
-          <motion.button 
-            key={cat} 
-            className={`glass-button ${filter === cat ? 'active' : ''}`}
-            onClick={() => setFilter(cat)}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
+      <h2 className="page-title">Meine Galerie</h2>
+      <p style={{textAlign: 'center', fontSize: '1.2rem', marginBottom: '40px', color: 'var(--color-text-light)'}}>
+        Klick auf ein Bild, um es genauer anzusehen.
+      </p>
+
+      <div className="masonry-grid">
+        {works.map(work => (
+          <motion.div 
+            key={work.id} 
+            layoutId={`card-container-${work.id}`}
+            className="gallery-item paper-card"
+            whileHover={{ scale: 1.03, rotate: (work.id % 2 === 0 ? 1 : -1) }}
+            onClick={() => setSelectedId(work.id)}
           >
-            {cat}
-          </motion.button>
+            <div className="img-wrapper">
+              <motion.img 
+                layoutId={`card-image-${work.id}`}
+                src={work.img} 
+                alt={work.title} 
+                loading="lazy"
+              />
+            </div>
+            <div className="gallery-info">
+              <motion.h4 layoutId={`card-title-${work.id}`}>{work.title}</motion.h4>
+            </div>
+          </motion.div>
         ))}
       </div>
-
-      <motion.div layout className="masonry-grid">
-        <AnimatePresence>
-          {filteredWorks.map(work => (
-            <motion.div 
-              key={work.id} 
-              layoutId={`card-container-${work.id}`}
-              className="gallery-item glass-panel"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.8 }}
-              whileHover={{ scale: 1.05, rotate: 2 }}
-              onClick={() => setSelectedId(work.id)}
-            >
-              <div className="img-wrapper">
-                <motion.img 
-                  layoutId={`card-image-${work.id}`}
-                  src={work.img} 
-                  alt={work.title} 
-                />
-                <div className="like-overlay">
-                  <Heart size={40} color="white" fill="var(--color-primary-dark)" />
-                </div>
-              </div>
-              <div className="gallery-info">
-                <motion.h4 layoutId={`card-title-${work.id}`}>{work.title}</motion.h4>
-                <span className="category-tag">{work.category}</span>
-              </div>
-            </motion.div>
-          ))}
-        </AnimatePresence>
-      </motion.div>
 
       <AnimatePresence>
         {selectedId && (
@@ -90,7 +65,7 @@ const Gallery = () => {
             {works.filter(w => w.id === selectedId).map(work => (
               <motion.div 
                 key={work.id} 
-                className="lightbox-content glass-panel"
+                className="lightbox-content paper-card"
                 layoutId={`card-container-${work.id}`}
                 onClick={e => e.stopPropagation()}
               >
@@ -103,7 +78,7 @@ const Gallery = () => {
                 <motion.h4 layoutId={`card-title-${work.id}`} className="lightbox-title">
                   {work.title}
                 </motion.h4>
-                <button className="glass-button close-btn" onClick={() => setSelectedId(null)}>
+                <button className="craft-button close-btn" onClick={() => setSelectedId(null)}>
                   Schließen
                 </button>
               </motion.div>

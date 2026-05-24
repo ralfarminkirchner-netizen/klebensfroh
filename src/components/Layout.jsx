@@ -1,35 +1,45 @@
 import { Outlet, NavLink } from 'react-router-dom';
-import { Heart, Image as ImageIcon, ShoppingBag, Paintbrush } from 'lucide-react';
 import { motion } from 'framer-motion';
 import './Layout.css';
+
+// SVG Icon representing a hand-drawn leaf/clover element
+const LeafIcon = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path>
+    <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path>
+  </svg>
+);
 
 const Layout = () => {
   return (
     <div className="layout-wrapper">
+      <div className="fairy-lights-bg"></div>
+      
       <motion.header 
-        className="header glass-panel"
-        initial={{ y: -100, opacity: 0 }}
+        className="header"
+        initial={{ y: -50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ type: 'spring', stiffness: 100, damping: 20 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
       >
         <div className="container header-content">
           <motion.div 
             className="logo"
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.05, rotate: -2 }}
             whileTap={{ scale: 0.95 }}
           >
-            <Paintbrush size={32} color="var(--color-primary-dark)" />
-            <h1>klebens<span>froh</span></h1>
+            <span className="logo-text">Klebens-froh</span>
+            <span className="logo-sub">PETRA KIRCHNER</span>
           </motion.div>
+          
           <nav className="nav-links">
-            <NavLink to="/" className={({isActive}) => isActive ? 'nav-item glass-button active' : 'nav-item glass-button'}>
-              <Heart size={18} /> Startseite
+            <NavLink to="/" className={({isActive}) => isActive ? 'nav-item active' : 'nav-item'}>
+              <LeafIcon /> Startseite
             </NavLink>
-            <NavLink to="/galerie" className={({isActive}) => isActive ? 'nav-item glass-button active' : 'nav-item glass-button'}>
-              <ImageIcon size={18} /> Galerie
+            <NavLink to="/galerie" className={({isActive}) => isActive ? 'nav-item active' : 'nav-item'}>
+              <LeafIcon /> Galerie
             </NavLink>
-            <NavLink to="/auftraege" className={({isActive}) => isActive ? 'nav-item glass-button active' : 'nav-item glass-button'}>
-              <ShoppingBag size={18} /> Aufträge
+            <NavLink to="/auftraege" className={({isActive}) => isActive ? 'nav-item active' : 'nav-item'}>
+              <LeafIcon /> Aufträge
             </NavLink>
           </nav>
         </div>
@@ -40,29 +50,19 @@ const Layout = () => {
       </main>
 
       <motion.footer 
-        className="footer glass-panel"
-        initial={{ y: 100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ type: 'spring', stiffness: 100, damping: 20, delay: 0.2 }}
+        className="footer"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
       >
         <div className="container footer-content">
           <div className="footer-text">
-            <p>Mit ganz viel Liebe handgemacht von Petra 💖</p>
+            <p>Mit Liebe und Papier gestaltet von Petra Kirchner 🌿</p>
           </div>
           <div className="social-links">
-            {['instagram', 'tiktok', 'facebook'].map((social, i) => (
-              <motion.a 
-                key={social}
-                href={`https://${social}.com`} 
-                target="_blank" 
-                rel="noreferrer"
-                whileHover={{ scale: 1.2, rotate: 10, backgroundColor: 'var(--color-primary)' }}
-                whileTap={{ scale: 0.9 }}
-                className="glass-social"
-              >
-                <div className={`icon-${social}`} />
-              </motion.a>
-            ))}
+            <motion.a href="https://instagram.com" target="_blank" rel="noreferrer" whileHover={{ y: -5, rotate: 10 }}>
+              Instagram
+            </motion.a>
           </div>
         </div>
       </motion.footer>
